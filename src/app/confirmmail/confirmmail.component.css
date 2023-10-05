@@ -1,0 +1,42 @@
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: white;
+  overflow: hidden;
+}
+.gl-mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+.gl-button.gl-button.btn-confirm, .gl-button.gl-button.btn-info, .gl-button.gl-button.btn-block.btn-confirm, .gl-button.gl-button.btn-block.btn-info {
+  background-color: #1f75cb;
+  box-shadow: inset 0 0 0 1px #1068bf;
+}
+.gl-button.gl-button.btn-confirm, .gl-button.gl-button.btn-info, .gl-button.gl-button.btn-success, .gl-button.gl-button.btn-danger, .gl-button.gl-button.btn-warning, .gl-button.gl-button.btn-block.btn-confirm, .gl-button.gl-button.btn-block.btn-info, .gl-button.gl-button.btn-block.btn-success, .gl-button.gl-button.btn-block.btn-danger, .gl-button.gl-button.btn-block.btn-warning {
+  color: #fff;
+}
+

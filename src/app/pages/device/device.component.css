@@ -1,0 +1,198 @@
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.tp-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+.tp-full-width {
+  width: 100%;
+}
+.custom-class {
+  float: right;
+  background-color: black;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: red;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: green;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px green;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Make sure that padding behaves as expected */
+* {box-sizing:border-box}
+
+/* Container for skill bars */
+.container {
+  width: 50%; /* Full width */
+  background-color: black; /* Grey background */
+}
+
+.skills {
+  text-align: right; /* Right-align text */
+  padding-top: 10px; /* Add top padding */
+  padding-bottom: 10px; /* Add bottom padding */
+  color: white; /* White text color */
+}
+
+.html {width: 100%; background-color: #4CAF50;} /* Green */
+.css {width: 80%; background-color: #2196F3;} /* Blue */
+.js {width: 65%; background-color: #f44336;} /* Red */
+.php {width: 60%; background-color: #808080;} /* Dark Grey */
+
+.tabDevice {
+  position:relative;
+  width:100%;
+  background-color: white;
+}
+.searrch {
+  height: 260px;
+  background-color: #279416;
+
+}
+.f
+{
+  width: 1200px;
+  background-color: #dee2e6;
+  border: #8BD2D1 ;
+  border-radius: 5px;
+}
+.contentt {
+  display: flex;
+  justify-content: space-between;
+}
+.checkk {
+
+  display: flex;
+  flex-direction: column;
+  width:60%;
+}
+.bSearch{
+  float: right;
+  width: 10%;
+  padding: 2px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+.test {
+  cursor: pointer;
+}
+legend {
+  width: 200px;
+  background-color: #279416;
+  color: black;
+}
+.connection{
+ margin:  0 auto;
+}
+th{
+  text-transform: capitalize!important;
+}
+
+@keyframes swing {
+
+  20% {
+    transform: rotate(15deg);
+    transform: translateX(-2px);
+  }
+  40% {
+    transform: rotate(-10deg);
+    transform: translateX(2px); 
+  }
+  60% {
+    transform: rotate(5deg);
+    transform: translateX(-2px);
+  }
+  80% {
+    transform: rotate(-5deg);
+    transform: translateX(2px);
+  }
+  100% {
+    transform: rotate(0deg);
+    transform: translateX(0);
+  }
+}
+
+.swinging-bell {
+  animation: swing 0.8s infinite;
+  transform-origin: center bottom;
+}
+.alerte{
+  color:red;
+  
+}
+
+.good{
+color :#279416
+}

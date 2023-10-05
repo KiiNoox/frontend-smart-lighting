@@ -1,0 +1,182 @@
+<div class="pagee">
+<div class="Sites">
+  <div class="TitleInventary">
+
+    <div class="Inv">
+      {{"Dimming" | translate}}:
+    </div>
+    <div class="create-assign">
+    <button (click)="Profile()"  style="background: #279416"><i class="fa fa-plus" aria-hidden="true" style="color: green"></i> {{"Create Profile" | translate}} </button>
+    <button (click)="AssingProfile()" style="background: #279416" ><i class="fa fa-plus" aria-hidden="true" style="color: green; height: 5px"></i>  {{"Assign Profile" | translate}} </button>
+    </div>
+  </div>
+  <h6 (click)="filterdevice2()" class="test"><i class="fa fa-eercast" aria-hidden="true"  style="color: green"></i> {{"Global" | translate}}</h6>
+  <kendo-treeview
+    kendoTreeViewExpandable
+    [nodes]="cols"
+    textField="name"
+    [children]="fetchChildren"
+    [hasChildren]="hasChildren"
+    (nodeClick)="onNodeClick($event)"
+    [kendoTreeViewCheckable]="{ mode: 'single' }"
+    [checkBy]="'_id'"
+    [(checkedKeys)]="checkedKeys"
+
+  >
+  <ng-template kendoTreeViewNodeTemplate let-dataItem>
+    <div *ngIf="dataItem.Status === 'activated'">  <h6><i class="fa fa-eercast" aria-hidden="true"  style="color: green"></i> {{dataItem.name}}</h6></div>
+    <div *ngIf="dataItem.Status === 'desactivated'">  <h6><i class="fa fa-eercast" aria-hidden="true"  style="color: red"></i> {{dataItem.name}}</h6></div>
+    <div *ngIf="dataItem.Status === 'Problem'">  <h6><i class="fa fa-eercast" aria-hidden="true"  style="color: darkorange"></i> {{dataItem.name}}</h6></div>
+
+  </ng-template>
+  >
+  </kendo-treeview>
+
+
+</div>
+  <div class="tabDevice">
+    <div class="searrch">
+    <fieldset class="f">
+      <legend>{{"Search" | translate}} :</legend>
+     <div class="contentt">
+       <div>
+         <label for="cars">{{"Search by name or id device" | translate}} :</label>
+         <input type="text" placeholder="{{'Search by name or id device' | translate}} ... " class="form-control" style="width: 300px" (click)="refresh()" [(ngModel)]="SearchText">
+       </div>
+       <div class="checkk">
+
+         <label for="cars">{{"Search By Alarm" | translate}}:</label>
+
+         <select name="cars" id="cars"  (change)="refresh()" [(ngModel)]="selectedValue"  class="selectpicker">
+           <option value="0" style="color:#008000;">&#9724; {{"good" | translate}}</option>
+           <option value="1" style="color:#ff0000;">&#9724;  {{"problem" | translate}}</option>
+         </select>
+         <label for="cars">{{"Search By Device Status" | translate}}:</label>
+
+         <select name="cars" id="" (change)="refresh()"  [(ngModel)]="StatusselectedValue">
+           <option value="activated" style="color:rgb(10, 43, 210);" >{{"activated" | translate}}</option>
+           <option value="desactivated"style="color:#ff0000;">{{"desactivated" | translate}}</option>
+         </select>
+         <label for="connectivity">{{"Search By Connectivity Status" | translate}}:</label>
+         <select name="connectivity" id="connectivity" (click)="refresh()"  [(ngModel)]="connectivitySelectedValue">
+           <option value="0" style="color:rgb(41, 0, 128);">&#9724; {{"connected" | translate}}</option>
+           <option value="1" style="color:rgb(135, 142, 0);">&#9724; {{"not connected" | translate}}</option>
+         </select>
+ 
+       </div>
+
+     </div>
+      <button type="submit" class="bSearch"(click)="search()"><i class="fa fa-search" ></i> {{"Search" | translate}}</button>
+
+    </fieldset>
+    </div>
+       <div *ngIf="Devices == undefined">
+         <a class="btn btn-sm btn-warning text-white ml-1">{{"There is no Device In this Zone" | translate}}</a>
+       </div>
+    <div *ngIf="Errurfilter">
+      <a class="btn btn-sm btn-warning text-white ml-1">{{"There is no Device" | translate}}</a>
+    </div>
+    <table class="table align-items-center table-flush" *ngIf="Devices != undefined">
+      <thead class="thead-light">
+      <tr>
+        
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+        <th scope="col"> </th>
+
+
+
+      </tr>
+      <tr>
+        <th scope="col">  {{"Device Name" | translate}}   </th>
+        <th scope="col">{{"Device Coded " | translate}} </th>
+        <th scope="col">{{"Alert" | translate}} </th>
+        <th scope="col">{{"Connection" | translate}} </th>
+        <th scope="col"> {{"Status" | translate}}</th>
+        <th scope="col"> {{"Light lvl" | translate}}</th>
+        <th scope="col"> {{"Data" | translate}}</th>
+        <th scope="col"> {{"Change Status" | translate}}</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody  *ngFor="let device of Devices | searchfilter:SearchText | paginate: { itemsPerPage: 5, currentPage: p }">
+      <tr>
+        <td>
+          {{device.name}}
+        </td>
+        <td>
+          {{device.identifiant}}
+
+        </td>
+
+        <td>
+          <div class="d-flex align-items-center" *ngIf="device.alert==0">
+
+            <a class="btn btn-sm btn-outline-info " (click)="onedit(device)" ><i class="fa fa-bell " style="color:green;size:30px" aria-hidden="true"></i></a>
+
+
+          </div>
+          <div class="d-flex align-items-center" *ngIf="device.alert==1">
+
+            <a class="btn btn-sm btn-outline-warning " (click)="onedit(device)" ><i class="fa fa-bell " style="color:red;size:30px" aria-hidden="true"></i></a>
+
+
+          </div>
+        </td>
+        <td>
+          <div *ngIf="device.connectivityAlert == false ; else elseBlock"><a class="btn btn-sm btn-info text-white ml-1">Connected</a></div>
+          <ng-template #elseBlock><a class="btn btn-sm btn-warning text-white ml-1">Not Connected</a></ng-template>
+        </td>
+        <td>
+          <div *ngIf="device.Status === 'activated' ; else elseBlockk"><a class="btn btn-sm btn-success text-white ml-1">{{device.Status}}</a></div>
+          <ng-template #elseBlockk><a class="btn btn-sm btn-danger text-white ml-1">{{device.Status}}</a></ng-template>
+        </td>
+  
+        <td>
+          <progress-bar [progress]="device.luminosite" [color]="'#EBEB00'" >
+          </progress-bar>
+        </td>
+        <td>
+          <div class="d-flex align-items-center">
+            <a class="btn btn-sm btn-info text-white ml-1" (click)="data(device)" ><i class="fa fa-search"></i></a>
+            <div>
+
+            </div>
+          </div>
+        </td>
+        <td>
+
+            <div *ngIf="device.Status =='desactivated'">
+              <label class="switch">
+                <input type="checkbox" (click)="checkboxStatus(device)">
+              <span class="slider round"></span>
+              </label>
+            </div>
+
+
+            <div *ngIf="device.Status =='activated'">
+              <label class="switch">
+                <input type="checkbox"  (click)="checkboxStatus(device)">
+              <span class="sliderr round"></span>
+              </label>
+            </div>
+
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"  directionLinks="true"
+                     autoHide="true"
+                     responsive="true"
+                     previousLabel="Previous"
+                     nextLabel="Next"
+                     screenReaderPaginationLabel="Pagination"
+                     screenReaderPageLabel="page"
+                     screenReaderCurrentLabel="You're on page"></pagination-controls>
+  </div>
+
+</div>

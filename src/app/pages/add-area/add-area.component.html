@@ -1,0 +1,56 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.min.js'></script>
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.css' type='text/css' />
+  <script src='https://npmcdn.com/mapbox-gl-circle/dist/mapbox-gl-circle.min.js'></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+</head>
+<body>
+<form class="form-grp"   [formGroup]="areaForm1" (ngSubmit)="addDevices(areaForm1.value)">
+
+  <div class="modal-header">
+    <h6 class="modal-title"> {{"ADD Site" | translate}}</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dialog.dismissAll('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="area" >
+      <div class="login">
+        <p>{{"Site name" | translate}} </p>
+        <div class="form-group">
+
+          <p><input type="text" class="form-control" id="name"
+                    formControlName="name" aria-describedby="name" placeholder="Enter name"></p>
+        </div>
+        <p>{{"Site Description" | translate}} </p>
+        <div class="form-group">
+          <p><input type="text" class="form-control" id="description" formControlName="description" placeholder="description"></p>
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" nbButton  outline class="btn btn-secondary" (click)="satelite()">{{"Satelite style" | translate}}</button>
+          <button type="button" nbButton  outline class="btn btn-secondary" (click)="stylestreet()">{{"Streets style" | translate}}</button>
+        </div>
+        <div >
+
+          <div   id="map-mapboxxxxxxx" >
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" style="background: #279416">{{"ADD" | translate}}</button>
+        </div>
+      </div>
+
+
+    </div >
+  </div>
+</form>
+</body>
+

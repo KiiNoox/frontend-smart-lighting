@@ -1,0 +1,5 @@
+.modal-header {
+  background-color: #8BD2D1;
+  display: flex;
+  justify-content: space-between;
+}

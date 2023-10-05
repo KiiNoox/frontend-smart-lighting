@@ -1,0 +1,121 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.min.js'></script>
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.css' type='text/css' />
+  <script src='https://npmcdn.com/mapbox-gl-circle/dist/mapbox-gl-circle.min.js'></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+</head>
+<div class="tabDevice">
+  <div class="searrch">
+    <fieldset class="f">
+      <legend>{{"Search" | translate}} :</legend>
+      <div class="contentt">
+        <div class="checkk">
+   
+          <label for="Alarm">{{"Search By Alarm" | translate}}:</label>
+          <select name="Alarm" id="Alarm"  [(ngModel)]="selectedValue"  class="selectpicker">
+            <option value="0" style="color:green;">&#9724; {{"good" | translate}}</option>
+            <option value="1" style="color:red;">&#9724; {{"problem" | translate}}</option>
+          </select>
+
+          <label for="status">{{"Search By Device Status" | translate}}:</label>
+          <select name="status" id="status" (click)="refresh()"  [(ngModel)]="StatusselectedValue">
+            <option value="activated">{{"activated" | translate}}</option>
+            <option value="desactivated">{{"desactivated" | translate}}</option>
+          </select>
+          <label for="connectivity">{{"Search By Connectivity Status" | translate}}:</label>
+          <select name="connectivity" id="connectivity" (click)="refresh()"  [(ngModel)]="connectivitySelectedValue">
+            <option value="0" style="color:rgb(41, 0, 128);">&#9724; {{"connected" | translate}}</option>
+            <option value="1" style="color:rgb(135, 142, 0);">&#9724; {{"not connected" | translate}}</option>
+          </select>
+        </div>
+
+      </div>
+    
+    <div class="search_StreetLight" >
+      <div class="testt" >
+        <ng-autocomplete #autoArea
+          [data]="areaData"
+          placeholder="{{'Search for Area ... ' | translate}}"
+          [searchKeyword]="keyword"
+          (selected)='selectEvent($event)'
+          [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+    
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item.name"></a>
+        </ng-template>
+    
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+      </div>
+      <div  class="testt">
+    
+        <ng-autocomplete #autoLigne
+          [data]="ligneData"
+          [searchKeyword]="keyword"
+          placeholder="{{'Search for Ligne ... ' | translate}}"
+          (selected)='selectEvent2($event)'
+          [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+    
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item.name"></a>
+        </ng-template>
+    
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+      </div>
+      <div  class="testt">
+        <ng-autocomplete #autoDevice
+          [data]="deviceData"
+          placeholder="{{'Search for Device ... ' | translate}}"
+          [searchKeyword]="keyword"
+          (selected)='selectEvent3($event)'
+          [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+    
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item.name"></a>
+        </ng-template>
+    
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+      </div>
+      <button id="search_btn" value="search" class="fa fa-search" (click)="Search()"></button>
+    
+    </div>
+  </fieldset>
+  </div>
+ 
+</div>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary" (click)="satelite()">{{"Satelite style" | translate}} </button>
+  <button type="button" class="btn btn-secondary" (click)="stylestreet()">{{"Streets style" | translate}}</button>
+  <button  type="button" class="btn btn-primary"(click)="reload()">reload</button>
+</div>
+
+<div id="map-mapglobal">
+  <div class='quakeInfo' *ngIf="detailzone === true">
+    <div class='heading'>
+      <h1 style="text-align: center; color: white">Location :</h1>
+    </div>
+    <div><strong>Descrition Of Location:</strong> <span id='loc'></span></div>
+    <div><strong>Status:</strong> <span id='date'></span></div>
+  </div>
+</div>
+
+

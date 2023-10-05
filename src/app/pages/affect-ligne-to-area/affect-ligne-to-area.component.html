@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h6 class="modal-title">ADD Area </h6>
+  <button type="button" class="close" aria-label="Close" (click)="dialog.dismissAll('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="area" >
+    <div class="login">
+      <p>assign Ligne To Area</p>
+      <div class="form-group" >
+        <ng-autocomplete
+          [data]="data"
+          [searchKeyword]="keyword"
+          (selected)='selectEvent($event)'
+          (inputChanged)='onChangeSearch($event)'
+          (inputFocused)='onFocused($event)'
+          [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item.name"></a>
+        </ng-template>
+
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="affect()">ADD</button>
+      </div>
+    </div>
+
+
+  </div >
+</div>

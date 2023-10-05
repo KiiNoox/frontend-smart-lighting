@@ -1,0 +1,14 @@
+.modal-header {
+  background-color: #279416;
+}
+.cancel{
+  background-color: #ffffff!important;
+  color: #000;
+  border: none;
+}
+.autocomplete-container .input-container .x i {
+  display: none;
+}
+.profileSelect{
+  width: 120%;
+}

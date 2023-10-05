@@ -1,0 +1,486 @@
+<div class="modal-header">
+  <h6 class="modal-title"> {{"Assign Profile" | translate}} </h6>
+  <button type="button" class="close" aria-label="Close" (click)="modal.dismissAll('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="row text-center">
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+        class="btn btn-primary"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()"
+      >
+         {{"Previous" | translate}}
+      </div>
+      <div
+        class="btn btn-outline-secondary"
+        mwlCalendarToday
+        [(viewDate)]="viewDate"
+      >
+         {{"Today" | translate}}
+      </div>
+      <div
+        class="btn btn-primary"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()"
+      >
+        {{"Next" | translate}}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitnle'):'en' }}</h3>
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+        class="btn btn-primary"
+        (click)="setView(CalendarView.Month)"
+        [class.active]="view === CalendarView.Month"
+      >
+        {{"Month" | translate}}
+      </div>
+      <div
+        class="btn btn-primary"
+        (click)="setView(CalendarView.Week)"
+        [class.active]="view === CalendarView.Week"
+      >
+         {{"Week" | translate}}
+      </div>
+      <div
+        class="btn btn-primary"
+        (click)="setView(CalendarView.Day)"
+        [class.active]="view === CalendarView.Day"
+      >
+         {{"Day" | translate}}
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view
+    *ngSwitchCase="CalendarView.Month"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [activeDayIsOpen]="activeDayIsOpen"
+    (dayClicked)="dayClicked($event.day)"
+    (eventClicked)="handleEvent('', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view
+    *ngSwitchCase="CalendarView.Week"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="CalendarView.Day"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-day-view>
+</div>
+
+<br>
+<br>
+
+<div style="background: #8BD2D1">
+  <h3>
+            {{"Assign Profile" | translate}}
+
+    <div class="clearfix"></div>
+  </h3>
+  <form class="form-grp"   [formGroup]="areaForm1" (ngSubmit)="AddProfile(areaForm1.value)">
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>{{"Profile" | translate}}</th>
+      <th> {{"Starts at" | translate}}</th>
+      <th>{{"Ends at" | translate}}</th>
+      <th> {{"Asseign To" | translate}} <i *ngIf="LigneClicked == true || SiteClicked == true" class="fa fa-reply float-right" style="color: red;" (click)="retour()" aria-hidden="true"></i></th>
+      <th> {{"scheduling" | translate}}<i *ngIf="M == 1 || P == 1 || A == 1" class="fa fa-reply float-right" style="color: red;" (click)="retour2()" aria-hidden="true"></i></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td>
+        <div class="form-group"  style="width: 140px">
+          <div style="display: flex;">
+          <ng-autocomplete formControlName="title" (click)="AfficheProfile()" class="profileSelect" #profileSelect
+            [data]="colsA"
+            [searchKeyword]="keyword"
+            (selected)='selectEvent($event)'
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+          <a class="btn cancel" (click)="handleUnselect()">x</a>
+        </div>
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+        </div>
+      </td>
+      <td>
+        <input type='date' formControlName="Start_Date"    class="form-control" />
+      </td>
+      <td>
+        <input type='date'  formControlName="End_Date"   class="form-control" />
+      </td>
+      <td>
+        <div *ngIf="LigneClicked == false && SiteClicked == false">
+        <h6> {{"You are going to Asseign a profile to" | translate}}  <button type="button" class="btn btn-warning" (click)="Siteclick()" >
+        {{"Site" | translate}}
+      </button>
+        {{"or" | translate}}
+        <button type="button" class="btn btn-warning"  (click)="Ligneclick()" >
+        {{"Line" | translate}}
+      </button>
+          ?</h6>
+        </div>
+        <div  *ngIf="SiteClicked == true" >
+          <ng-multiselect-dropdown  formControlName="Area"  class="form-control" style="width: 200px"
+                                     [placeholder]="'Select Site'"
+                                     [settings]="dropdownSettings"
+                                     [data]="area"
+                                     [(ngModel)]="selectedItems"
+                                     (onSelect)="onItemSelect($event)"
+                                     (onSelectAll)="onSelectAll($event)"
+                                     (onDeSelectAll)="onDeSelectAll()"	
+                                     (onDeSelect)="onDeSelect($event)"
+          >
+          </ng-multiselect-dropdown>
+        </div>
+        <div *ngIf="LigneClicked == true">
+          <ng-multiselect-dropdown   class="form-control" formControlName="Ligne" style="width: 200px"
+                                     [placeholder]="'Select Line'"
+                                     [settings]="dropdownSettings2"
+                                     [data]="ligne"
+                                     [(ngModel)]="selectedItems2"
+                                     (onSelect)="onItemSelectLine($event)"
+                                     (onSelectAll)="onSelectAllLines($event)"
+                                     (onDeSelectAll)="onDeSelectAllLines()"	
+                                     (onDeSelect)="onDeSelectLine($event)"
+          >
+          </ng-multiselect-dropdown>
+
+        </div>
+      </td>
+<td>
+  <div *ngIf="P == 0">
+  <button type="button" class="btn btn-warning" (click)="Pclick()" >
+    {{"periodic" | translate}}
+  </button>
+  </div>
+  <div *ngIf=" M == 0 || M ==1">
+  <button type="button" class="btn btn-warning" (click)="Mclick()" >
+    {{"monthly" | translate}}
+  </button>
+  </div>
+  <div *ngIf=" A == 0 || A ==1">
+  <button type="button" class="btn btn-warning" (click)="Aclick()" >
+      {{"annual" | translate}}
+  </button>
+</div>
+
+  <div *ngIf="P == 1">
+  <ng-multiselect-dropdown   class="form-control" formControlName="perodique" style="width: 200px"
+                             [placeholder]="'Select days'"
+                             [settings]="dropdownSettings5"
+                             [data]="days"
+                             [(ngModel)]="selectedItems5"
+                             (onSelect)="onItemSelect5($event)"
+                             (onSelectAll)="onSelectAll5($event)"
+  >
+  </ng-multiselect-dropdown>
+    </div>
+</td>
+    </tr>
+    </tbody>
+  </table>
+    <button type="submit" class="btn btn-primary float-right" >
+      {{"Assign" | translate}}
+    </button>
+  </form>
+</div>
+
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3>
+    {{"Profiles Assigned" | translate}}
+  <div class="clearfix"></div>
+</h3>
+
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>{{"Title" | translate}}</th>
+      <th>{{"scheduling" | translate}}</th>
+      <th>{{"Starts at" | translate}}</th>
+      <th>{{"Ends at" | translate}}</th>
+      <th>{{ "Site" | translate }}</th>
+      <th>{{ "Line" | translate }}</th>
+      <th>{{"Cancel The Asseign" | translate}}</th>
+      <th>{{"update The Asseign" | translate}}</th>
+
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let col of listOfAsignedProfiles">
+      <td>
+        <div *ngIf="col.profile">
+          <span *ngFor="let profile of col.profile | keyvalue">
+            <span *ngIf="profile.key=='name'">     
+                {{ profile.value }}
+            </span>
+          </span>
+        </div>      </td>
+      <td>
+        <div *ngIf=" col.mensuel == 1">
+          {{"monthly" | translate}}
+        </div>
+        <div *ngIf=" col.annuel == 1">
+          {{"annual" | translate}}
+        </div>
+        <div *ngIf=" col.perodique.length > 0">
+          {{"periodic" | translate}} :
+          <div *ngFor="let colx of col.perodique">
+            <div *ngIf=" colx == 1">
+                {{"Monday" | translate}}
+            </div>
+            <div *ngIf=" colx == 2">
+               {{"Tuesday" | translate}}
+            </div>
+            <div *ngIf=" colx == 3">
+                {{"Wednesday" | translate}}
+            </div>
+            <div *ngIf=" colx == 4">
+                {{"Thursday" | translate}}
+            </div>
+            <div *ngIf=" colx == 5">
+               {{"Friday" | translate}}
+            </div>
+            <div *ngIf=" colx == 6">
+               {{"Saturday" | translate}}
+            </div>
+            <div *ngIf=" colx == 7">
+               {{"Sunday" | translate}}
+            </div>
+          </div>
+        </div>
+        <div *ngIf=" col.perodique.length < 0 && col.annuel == 0 && col.mensuel == 0">
+          -------
+        </div>
+      </td>
+      
+       <td style="width: 130px">
+
+        {{col.Start_Date.slice(0,10)}}
+      </td>
+      <td style="width: 130px">
+        {{col.End_Date.slice(0,10)}}
+      </td>
+      <td>
+        <span *ngFor="let area of col.Area">{{area.name}} <br></span>
+
+      </td>
+      <td>
+        <span *ngFor="let ligne of col.Ligne">{{ligne.name}} <br></span>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="CancelProfile(col._id)">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-primary" (click)="EditProfile(col._id)">
+          <i class='fa fa-edit' aria-hidden="true"></i>
+        </button>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h3  style="text-align: center; ">Profile Detail </h3>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <h5 style="background: #0ca3d2; text-align: center"> Profile: {{modalData?.event.title}} </h5><br>
+      <div *ngIf="modalData.event.actions.length > 0 ">
+        <h5 style="background: #0ca3d2; text-align: center">  Ligne : </h5>
+      <div *ngFor="let x of modalData?.event.actions ">
+          <h7>-{{x.name}}</h7>
+      </div>
+      </div>
+      <div *ngIf="modalData.event.attendees.length > 0 ">
+        <h5 style="background: #0ca3d2; text-align: center"> Site : </h5>
+        <div *ngFor="let x of modalData?.event.attendees ">
+          -{{x.name}}
+        </div>
+      </div>
+    </div>
+    <div>
+      <h5 style="background: #0ca3d2; text-align: center"> Profile Date: </h5>
+      <pre>Start Day : {{modalData?.event.start}}</pre>
+      <pre>End Day : {{modalData?.event.end}}</pre>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">
+      OK
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #modalContentEdit let-close="close">
+
+  <div class="modal-header">
+    <h3  style="text-align: center; ">Update Assignment </h3>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body" >
+    <form class="form-grp"   [formGroup]="areaForm2" (ngSubmit)="zero()">
+    <h5>start Date</h5>
+    <input type="date" id="start" formControlName="Start_Date"  class="form-control" name="trip-start"
+           value="{{startDate}}"  [(ngModel)]="startDate"> <br>
+     <h5>End Date</h5>
+    <input type="date" id="start" formControlName="End_Date"  class="form-control" name="trip-start"
+           value="{{endDate}}"  [(ngModel)]="endDate"> <br>
+    <div *ngIf="addsite == false && addligne == false && removesite == false && removeligne == false">
+    <h5>You are going to :
+      <div>
+          <button type="button" style="width: 280px" class="btn btn-primary" (click)="AddSiteclick()" >
+          Add Site To this Profile
+          </button>
+          <button type="button"  class="btn btn-primary" style="width: 280px" (click)="AddLigneclick()" >
+          Add Ligne To this Profile
+          </button>
+     </div>
+    <button type="button" class="btn btn-danger" style="width: 320px"(click)="removeSiteclick()" >
+      Remove Site from this Profile
+    </button>
+    <button type="button" class="btn btn-danger" style="width: 320px"(click)="removeLigneclick()" >
+      Remove Ligne from this Profile
+    </button>
+      ? </h5>
+    </div>
+    <div  *ngIf="addsite == true" >
+      <h5>Select Site : <i class="fa fa-reply float-right"    style="color: red;" (click)="retourEdit()" aria-hidden="true"></i></h5>
+      <ng-multiselect-dropdown   class="form-control" style="width: 200px" formControlName="Area"
+                                 [placeholder]="'Select Site'"
+                                 [settings]="dropdownSettings"
+                                 [data]="areaNotInProfile"
+                                 [(ngModel)]="selectedItems"
+
+                                 (onSelect)="onItemSelect($event)"
+                                 (onSelectAll)="onSelectAll($event)"
+                                 (onDeSelectAll)="onDeSelectAll()"	
+                                 (onDeSelect)="onDeSelect($event)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+    <div *ngIf="addligne == true">
+      <h5>Select Ligne :  <i class="fa fa-reply float-right"  style="color: red;" (click)="retourEdit()" aria-hidden="true"></i></h5>
+      <ng-multiselect-dropdown   class="form-control" style="width: 200px" formControlName="ligne"
+                                 [placeholder]="'Select Line'"
+                                 [settings]="dropdownSettings2"
+                                 [data]="lineNotInProfile"
+                                 [(ngModel)]="selectedItems2"
+                                 (onSelect)="onItemSelectLine($event)"
+                                 (onSelectAll)="onSelectAllLines($event)"
+                                 (onDeSelectAll)="onDeSelectAllLines()"	
+                                 (onDeSelect)="onDeSelectLine($event)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+      <div *ngIf="removesite == true">
+        <h5>Select Area :  <i class="fa fa-reply float-right"  style="color: red;" (click)="retourEdit()" aria-hidden="true"></i></h5>
+        <ng-multiselect-dropdown   class="form-control" style="width: 200px" formControlName="ligne"
+                                   [placeholder]="'Select Area'"
+                                   [settings]="dropdownSettings3"
+                                   [data]="AreaByProfile"
+                                   [(ngModel)]="selectedItems3"
+                                   (onSelect)="onItemSelect3($event)"
+                                   (onSelectAll)="onSelectAll3($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+      <div *ngIf="removeligne == true">
+        <h5>Select Ligne :  <i class="fa fa-reply float-right"  style="color: red;" (click)="retourEdit()" aria-hidden="true"></i></h5>
+        <ng-multiselect-dropdown   class="form-control" style="width: 200px" formControlName="ligne"
+                                   [placeholder]="'Select Ligne'"
+                                   [settings]="dropdownSettings4"
+                                   [data]="Getlignebyprofile"
+                                   [(ngModel)]="selectedItems4"
+                                   (onSelect)="onItemSelect4($event)"
+                                   (onSelectAll)="onSelectAll4($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="UpdateProfile()">
+      OK
+    </button>
+    
+  </div>
+</ng-template>

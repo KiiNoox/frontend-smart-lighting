@@ -1,0 +1,57 @@
+<div class="modal-header" style="background: #279416">
+  <h6 class="modal-title" style="color:white">Electric Meter Data </h6>
+  <button type="button" class="close" aria-label="Close" (click)="dialog.dismissAll('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+</div>
+<div class="modal-body">
+  <div class="row" id="test" style="margin-left:50px">
+    <div class="data" *ngIf="loading==false">     
+      <p>Last date : {{lastDate}}</p>
+    </div>
+    <div class="data" *ngIf="loading==true">     
+      <mat-spinner mode="indeterminate" color="accent" diameter="50"></mat-spinner>
+    </div>
+          <div class="row" id="test5">
+
+            <rg-gauge-chart
+              [canvasWidth]="canvasWidth"
+              [name]="name1"
+              [needleValue]="needleValue_ActivePowerTotal"
+              [centralLabel]="label_ComActiveTotal"
+              [options]="options"
+              [bottomLabel]="bottomLabel">
+            </rg-gauge-chart>
+            <rg-gauge-chart
+              [canvasWidth]="canvasWidth"
+              [name]="name2 "
+              [needleValue]="label_ActivePowerTotal"
+              [centralLabel]="needleValue_PositiveActiveTotal"
+              [options]="options"
+              [bottomLabel]="bottomLabelW">
+            </rg-gauge-chart>
+            <rg-gauge-chart
+              [canvasWidth]="canvasWidth"
+              [name]="name3 "
+              [needleValue]="label_ReverseActiveTotal"
+              [centralLabel]="needleValue_ReverseActiveTotal"
+              [options]="options"
+              [bottomLabel]="bottomLabelW2">
+            </rg-gauge-chart>
+
+          </div>
+
+    <div class="row" style="margin-left:30px">
+      <div >  <h5 style="color:#0c0b0b"> <span style="color: #f81515 ;">Current : </span>   {{id.current}} mA </h5></div>
+      &nbsp;&nbsp;&nbsp;
+      <div>
+        <h5 style="color:#0c0b0b"> <span style="color: #f81515;">Power Factor: </span> {{ getFormattedPowerFactor() }}
+        </h5>
+
+      </div>
+
+
+  </div>
+
+</div>

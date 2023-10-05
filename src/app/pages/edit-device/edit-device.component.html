@@ -1,0 +1,97 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.min.js'></script>
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.2.0/mapbox-gl-geocoder.css' type='text/css' />
+  <script src='https://npmcdn.com/mapbox-gl-circle/dist/mapbox-gl-circle.min.js'></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+</head>
+<body>
+<form class="form-grp"   [formGroup]="areaForm1" (ngSubmit)="EditDevice(areaForm1.value)">
+
+  <div class="modal-header">
+    <h6 class="modal-title">{{"Edit Device" | translate}} </h6>
+    <button type="button" class="close" aria-label="Close" (click)="dialog.dismissAll('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="area" >
+      <div class="login">
+        <p> {{"Device name" | translate}} </p>
+        <div class="form-group">
+
+          <p><input type="text" class="form-control" id="name"
+                    formControlName="name" aria-describedby="name" placeholder="Enter name" ngModel="{{id.name}}"></p>
+        </div>
+        <p> {{"device Description" | translate}} </p>
+        <div class="form-group">
+          <p><input type="text" class="form-control" id="description" formControlName="description" placeholder="description" ngModel="{{id.description}}"></p>
+        </div>
+
+        <p>{{"Site name" | translate}}</p>
+        <div class="form-group" >
+          <ng-autocomplete
+            [data]="data"
+            [searchKeyword]="keyword"
+            (selected)='selectEvent($event)'
+            (inputChanged)='onChangeSearch($event)'
+            (inputFocused)='onFocused($event)'
+            [itemTemplate]="itemTemplate"
+            [initialValue]="id.Area"
+            [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+        </div>
+        <p>{{"Line name" | translate}}</p>
+        <div class="form-group" >
+          <ng-autocomplete
+            [data]="data2"
+            [searchKeyword]="keyword"
+            (selected)='selectEvent2($event)'
+            (inputChanged)='onChangeSearch2($event)'
+            (inputFocused)='onFocused2($event)'
+            [itemTemplate]="itemTemplate"
+            [initialValue]="id.Ligne"
+            [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+        </div>
+        <a class="btn btn-sm btn-success text-white" (click)="ChangeAreaLocation()"><i class="fa fa-plus"></i>{{"Change Device Location" | translate}}</a>
+
+        <div >
+
+          <div   id="map-mapboxLigneEdit" >
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" style="background: #279416">{{"Edit" | translate}}</button>
+        </div>
+      </div>
+
+
+    </div >
+  </div>
+</form>
+</body>
+

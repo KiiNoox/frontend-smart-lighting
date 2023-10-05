@@ -1,0 +1,198 @@
+<form class="form-grp"   [formGroup]="areaForm1" (ngSubmit)="addDevices(areaForm1.value)">
+
+  <div class="test2">
+    <div class="modal-header">
+      <div *ngIf="name_profile  === '' ; else elseBlock"> <h6 class="modal-title">Profile </h6></div>
+      <ng-template #elseBlock> <div><h6 class="modal-title">Profile </h6></div></ng-template>
+      <div class="save">
+        <div *ngIf="name_profile  === '' ; else elseBlockk"> <button type="submit" class="btn btn-warning">Save Profile</button></div>
+        <ng-template #elseBlockk> <button type="submit" class="btn btn-warning">Edit Profile</button></ng-template>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="dialog.dismissAll('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+
+      <div class="Profiles">
+        <div class="crudProfile">
+          <i class="fa fa-plus" aria-hidden="true" style="margin:0 4em 0 1em  ; color: #0b7dda;transform: scale(1.1);cursor: pointer;" (click)="ADD()"></i>
+          <i class="fa fa-trash" aria-hidden="true" style="color: #0b7dda;transform: scale(1.1);cursor: pointer;" (click)="delete()"></i>
+        </div>
+        <hr>
+        <div *ngFor="let profile of profiles">
+          <a class="btn btn-sm btn-info text-white ml-1" style="width: 230px" [ngStyle]="{'background-color':profile.color }" (click)="select(profile)"> 
+             <h6><i class="fa fa-clock-o"  aria-hidden="true"> {{profile.name}}</i></h6></a>
+        </div>
+      </div>
+      <div class="reglage">
+        <div class="profile_name"   [ngStyle]="{'background-color':color_profile }"  *ngIf="name_profile  !== '' "> <h6>Profile : {{name_profile}} </h6></div>
+        <div class="inputs">
+          <div>
+            <h6>name:</h6>
+            <input type="text"  formControlName="name" placeholder="Weekends" [ngModel]="name_profile" />
+          </div>
+          <div class="colorr">
+            <h6>   color:</h6>
+            <input type="color" formControlName="color"  [ngModel]="color_profile"/>
+          </div>
+          <div class="Motion">
+            <div style="width: 1500px" *ngIf="mode_auto === false; else elseBlockkk">
+              <span >change Mode : </span>
+              <button type="button" class="btn btn-warning" (click)="modeauto()">Mode auto</button>
+            </div>
+            <ng-template #elseBlockkk>
+              <span for="site">Select Site: <i  class="fa fa-reply float-right" style="color: red;" (click)="retour()" aria-hidden="true"></i></span>
+              <select name="site" id="site"  [(ngModel)]="profileArea" [ngModelOptions]="{ standalone: true }"  class="selectpicker" (change)="changetime($event)">
+                <option disabled >Select Site:</option>
+                <option *ngFor="let area of areas"  [value]="area._id"  style="color:green;" >{{area.name}}</option>
+              </select>       
+             </ng-template>
+          </div>
+
+        </div>
+
+        <div class="imghorloge">
+          <div>
+            <img src="../../../assets/img/Dimming.png" class="test"   alt=""/>
+          </div>
+          <div class="tabMotion">
+            <table class="table align-items-center table-flush" style=" border-style:solid;
+ border-color: #0c5460;">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">Time   </th>
+                <th scope="col">Lampe Lvl</th>
+             
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  SunSet
+                </td>
+                <td>
+                  {{Lmp_LVL1}} %
+                </td>
+                            </tr>
+              <tr>
+                <td>
+                  {{T1}}
+                </td>
+                <td>
+                  {{Lmp_LVL2}} %
+                </td>
+                             </tr> <tr>
+                <td>
+                  {{T2}}
+                </td>
+                <td>
+                  {{Lmp_LVL3}} %
+                </td>
+                             </tr> <tr>
+                <td>
+                  {{T3}}
+                </td>
+                <td>
+                  {{Lmp_LVL4}} %
+                </td>
+                              </tr> <tr>
+                <td>
+                  {{T4}}
+                </td>
+                <td>
+                  {{Lmp_LVL5}} %
+                </td>
+                            </tr> <tr>
+                <td>
+                  {{T5}}
+                </td>
+                <td>
+                  {{Lmp_LVL6}} %
+                </td>
+                             </tr> <tr>
+                <td>
+                  SunRise
+                </td>
+                <td>
+                  0 %
+                </td>
+                           </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="buttonReglage"><i class="fa fa-plus" aria-hidden="true" (click)="plus1()"></i> {{Lmp_LVL1}} % <i class="fa fa-minus" aria-hidden="true" (click)="moins1()"></i></div>
+      <div class="buttonReglage2"><i class="fa fa-plus" aria-hidden="true" (click)="plus2()"></i> {{Lmp_LVL2}} % <i class="fa fa-minus" aria-hidden="true" (click)="moins2()"></i></div>
+      <div class="buttonReglage3"><i class="fa fa-plus" aria-hidden="true" (click)="plus3()"></i> {{Lmp_LVL3}} % <i class="fa fa-minus" aria-hidden="true" (click)="moins3()"></i></div>
+      <div class="buttonReglage4"><i class="fa fa-plus" aria-hidden="true" (click)="plus4()"></i> {{Lmp_LVL4}} % <i class="fa fa-minus" aria-hidden="true" (click)="moins4()"></i></div>
+      <div class="buttonReglage5"><i class="fa fa-plus" aria-hidden="true" (click)="plus5()"></i> {{Lmp_LVL5}} % <i class="fa fa-minus" aria-hidden="true" (click)="moins5()"></i></div>
+      <div class="buttonReglage6"><i class="fa fa-plus" aria-hidden="true" (click)="plus6()"></i> {{Lmp_LVL6}} % <i class="fa fa-minus" aria-hidden="true" (click)="moins6()"></i></div>
+      <div *ngIf="name_profile  === '' ; else elseBlockkx">
+        <div class="heure1Reglage">  {{T0}}H    </div>
+        <div class="heure2Reglage">
+          <select [(ngModel)]="T1" [ngModelOptions]="{ standalone: true }">
+            <option *ngFor="let v of value " [value]="v">{{v}}</option>
+          </select> H
+        </div>
+        <div class="heure3Reglage">  
+          <select [(ngModel)]="T2" [ngModelOptions]="{ standalone: true }">
+            <option *ngFor="let v of value " [value]="v">{{v}}</option>
+         </select> H   
+        </div>
+        <div class="heure4Reglage">
+          <select [(ngModel)]="T3" [ngModelOptions]="{ standalone: true }">
+            <option *ngFor="let v of value " [value]="v">{{v}}</option>
+          </select> H   
+        </div>
+        <div class="heure5Reglage">  
+          <select [(ngModel)]="T4" [ngModelOptions]="{ standalone: true }">
+            <option *ngFor="let v of value " [value]="v">{{v}}</option>
+          </select>   H </div>
+        <div class="heure6Reglage">  
+          <select [(ngModel)]="T5" [ngModelOptions]="{ standalone: true }">
+            <option *ngFor="let v of value " [value]="v">{{v}}</option>
+          </select>  H  
+        </div>
+        <div class="heure7Reglage"> {{T6}}H    </div>
+        <div class="SunSetReglage"> SunSet    </div>
+        <div class="SunRiseReglage"> SunRise  </div>
+
+      </div>
+
+      <ng-template #elseBlockkx>
+        <div class="heure1Reglage">  {{T0}}H    </div>
+        <div class="heure2Reglage">
+          <select [(ngModel)]="T1" [ngModelOptions]="{ standalone: true }">
+            <option *ngFor="let v of value " [value]="v" >{{v}}</option>
+          </select> H
+        </div>
+        <div class="heure3Reglage"> 
+          <select [(ngModel)]="T2" [ngModelOptions]="{ standalone: true }">
+          <option *ngFor="let v of value " [value]="v">{{v}}</option>
+        </select> H   </div>
+        <div class="heure4Reglage">
+        <select  [(ngModel)]="T3" [ngModelOptions]="{ standalone: true }">
+          <option *ngFor="let v of value " [value]="v">{{v}}</option>
+        </select> H   </div>
+        <div class="heure5Reglage">  
+        <select [(ngModel)]="T4" [ngModelOptions]="{ standalone: true }">
+          <option *ngFor="let v of value " [value]="v">{{v}}</option>
+        </select>   H </div>
+        <div class="heure6Reglage"> 
+        <select  [(ngModel)]="T5" [ngModelOptions]="{ standalone: true }">
+          <option *ngFor="let v of value " [value]="v">{{v}}</option>
+        </select>  H  </div>
+        <div class="heure7Reglage"> {{T6}}H    </div>
+        <div class="SunSetReglage"> SunSet    </div>
+        <div class="SunRiseReglage"> SunRise  </div>
+      </ng-template>
+    </div>
+  </div>
+</form>
+
+<simple-notifications></simple-notifications>

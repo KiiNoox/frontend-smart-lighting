@@ -1,0 +1,23 @@
+.custom-class {
+  float: right;
+  background-color: black;
+}
+body{
+  background-color: whitesmoke;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.modal-header {
+  background-color: #279416;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+#map-mapboxLigneEdit {
+  width: 750px;
+  height: 600px;
+  background-color: white;
+
+}

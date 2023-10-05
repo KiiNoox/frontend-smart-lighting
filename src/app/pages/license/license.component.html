@@ -1,0 +1,168 @@
+<div *ngIf="FreeLicense < 14 && valide === false">
+  <table class="table align-items-center table-flush">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th colspan="3">
+      </th>
+
+    </tr>
+    <tr>
+      <th scope="col">{{"Product" | translate}}</th>
+      <th scope="col">{{'End Date' | translate }}</th>
+      <th scope="col">{{'License' | translate }}</th>
+      <th scope="col">{{'Device Allowed' | translate }}</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tr>
+
+      <td>
+        Try License
+      </td>
+      <td>
+        {{date | date }}
+      </td>
+      <td>
+        Try License
+      </td>
+      <td>
+        10
+      </td>
+    </tr>
+
+  </table>
+  <center>
+    <h5>
+      Insert Your new license key here Please .   </h5>
+    <br>
+    <input type="text" [(ngModel)]="code" />
+    <button type="submit" (click)="ActivatedLicense()"> {{"Confirm" | translate}}</button>
+  </center>
+</div>
+
+<div *ngIf="(limite === false)  ; else elseBlockkk">
+  <center>
+    <h1>License unlimited</h1>
+  </center>
+</div>
+<ng-template #elseBlockkk *ngIf="FreeLicense < 14 && valide === false ; else elseBlockk">
+  <table class="table align-items-center table-flush">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th scope="col"> </th>
+      <th colspan="3">
+      </th>
+
+    </tr>
+    <tr>
+      <th scope="col">{{"Product" | translate}}</th>
+      <th scope="col">{{'End Date' | translate }}</th>
+      <th scope="col">{{'License' | translate }}</th>
+      <th scope="col">{{'Device Allowed' | translate }}</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tr>
+
+      <td>
+        Try License
+      </td>
+      <td>
+          {{date | date }}
+      </td>
+      <td>
+        Try License
+      </td>
+      <td>
+        10
+      </td>
+    </tr>
+
+  </table>
+</ng-template>
+<ng-template #elseBlockk>
+<div *ngIf="valide === false ; else elseBlock">
+  <center>
+    <h1 class="gl-mt-0" >your license key is expired...</h1>
+  </center>
+  <center>
+    <p class="lead gl-mb-6">
+      Please contact us to get a new Key.
+    </p>
+  </center>
+  <hr>
+  <center>
+    <h5>
+      Insert Your new license key here Please .   </h5>
+    <br>
+    <input type="text" [(ngModel)]="code" />
+    <button type="submit" (click)="ActivatedLicense()"> {{"Confirm" | translate}}</button>
+  </center>
+</div>
+<ng-template #elseBlock>
+  <div *ngIf="(limite === true)">
+<table class="table align-items-center table-flush">
+  <thead class="thead-light">
+  <tr>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th colspan="3">
+    </th>
+
+  </tr>
+  <tr>
+    <th scope="col">{{"Product" | translate}}</th>
+    <th scope="col">{{"Start Date" | translate}}</th>
+    <th scope="col">{{'End Date' | translate }}</th>
+    <th scope="col">{{'License' | translate }}</th>
+    <th scope="col">{{'Device Allowed' | translate }}</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tr *ngFor="let l of cols.license" >
+
+    <td *ngIf="l.Valide === true">
+      {{l.company}}
+    </td>
+    <td *ngIf="l.Valide === true">
+   {{l.date_debut.slice(0,10)}}
+
+    </td >
+    <td *ngIf="l.Valide === true">
+      {{l.date_fin.slice(0,10)}}
+    </td>
+    <td *ngIf="l.Valide === true">
+      {{l.code}}
+    </td>
+    <td *ngIf="l.Valide === true">
+      {{l.device}}
+    </td>
+  </tr>
+
+</table>
+
+  <hr>
+  <center>
+    <h5>
+      Insert Your new license key here Please .   </h5>
+    <br>
+    <input type="text" [(ngModel)]="code" />
+    <button type="submit" (click)="ActivatedLicense()"> {{"Confirm" | translate}}</button>
+  </center>
+  </div>
+</ng-template>
+</ng-template>

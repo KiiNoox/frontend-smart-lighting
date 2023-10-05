@@ -1,0 +1,62 @@
+<h2>Welcome To LuxBoard</h2>
+<div class="container" id="container">
+  <div class="form-container sign-up-container">
+    <form class="form-grp"   [formGroup]="userForm2" (ngSubmit)="RegisterUser(userForm2.value)">
+
+    <h3>Create Account</h3>
+      <input type="text" placeholder="username" formControlName="username" />
+      <input type="email" placeholder="email" formControlName="email" (click)="resetError()"/>
+      <input type="password" placeholder="password" formControlName="password" />
+      <input type="password" placeholder="Password" formControlName="Confirmpassword" />
+      <div *ngIf="Error === true" class="alert alert-danger" role="alert" style="width: 280px">  this Email is taken. Try another !</div>
+      <div *ngIf="ErrorPassword === true" class="alert alert-danger" role="alert" style="width: 280px">  These passwords do not match. Try Again.</div>
+      <div *ngIf="ErrorValidation === true" class="alert alert-danger" role="alert" style="width: 280px"> You must fill all the fields !</div>
+
+      <button>Sign Up</button>
+    </form>
+  </div>
+  <div  class="form-container sign-in-container">
+    <form class="form-grp"   [formGroup]="userForm1" (ngSubmit)="addCompany(userForm1.value)">
+      <h1>Sign in</h1>
+      <input type="email" placeholder="Email"  id="email"
+             formControlName="email"
+      />
+      <input type="password" id="password" formControlName="password" placeholder="Password" />
+      <a [routerLink]="['/ForgotPassword']">Forgot your password?</a>
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h2>Welcome Back!</h2>
+        <p>To keep connected with us please login with your personal info</p>
+        <button class="ghost" id="signIn">Sign In</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>Hello,</h1>
+        <p>Enter your personal details </p>
+        <button class="ghost" id="signUp">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+
+</footer>
+<script>
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
+
+    signUpButton.addEventListener('click', () => {
+        console.log('hello');
+        container.classList.add("right-panel-active");
+    });
+
+    signInButton.addEventListener('click', () => {
+        console.log('hello');
+        container.classList.remove("right-panel-active");
+    });
+</script>

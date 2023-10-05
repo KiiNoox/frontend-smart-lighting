@@ -1,0 +1,16 @@
+.data{
+    text-align: center;
+    position: absolute;
+    bottom :0;
+    right: 0;
+}
+.data p{
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+    padding: 1em;
+}
+.row {
+    margin: auto;
+}

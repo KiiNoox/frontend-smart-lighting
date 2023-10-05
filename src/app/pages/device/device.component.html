@@ -1,0 +1,178 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+</head>
+<body>
+
+<div class="tabDevice">
+  <div class="searrch">
+    <fieldset class="f">
+      <legend>{{"Search" | translate}} :</legend>
+      <div class="contentt">
+        <div>
+          <label for="cars"> {{"Search by name or id deviceor ligne or site " | translate}} :</label>
+          <input type="text" placeholder="{{'Search' | translate}} ... " class="form-control" style="width: 300px" (click)="refresh()" [(ngModel)]="SearchText">
+        </div>
+        <div class="checkk">
+
+          <label for="cars">{{"Search By Alarm" | translate}}:</label>
+
+          <select name="cars" id="cars"  (change)="refresh()" [(ngModel)]="selectedValue"  class="selectpicker">
+            <option value="0" style="color:green;">&#9724; {{"good" | translate}}</option>
+            <option value="1" style="color:red;">&#9724; {{"problem" | translate}}</option>
+          </select>
+        <label for="connectivity">{{"Search By Connectivity Status" | translate}}:</label>
+        <select name="connectivity" id="connectivity" (click)="refresh()"  [(ngModel)]="connectivitySelectedValue">
+          <option value="0" style="color:rgb(41, 0, 128);">&#9724; {{"connected" | translate}}</option>
+          <option value="1" style="color:rgb(135, 142, 0);">&#9724; {{"not connected" | translate}}</option>
+        </select>
+
+          <label for="cars">{{"Search By Device Status" | translate}}:</label>
+
+          <select name="cars" id="" (change)="refresh()"  [(ngModel)]="StatusselectedValue">
+            <option value="activated">{{"activated" | translate}}</option>
+            <option value="desactivated">{{"desactivated" | translate}}</option>
+          </select>
+        </div>
+
+      </div>
+      <button type="submit" class="bSearch"(click)="search()"><i class="fa fa-search" ></i> {{"Search" | translate}}</button>
+
+    </fieldset>
+  </div>
+</div>
+
+<table class="table align-items-center table-flush">
+  <thead class="thead-light">
+  <tr>
+    <th colspan="2"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col">
+      <div *ngIf="role === true">
+      <a class="btn btn-sm btn-success text-white"  (click)="addDevice()"><i class="fa fa-plus"></i>{{"Add Device" | translate}} </a>
+      </div>
+        </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+  </tr>
+  <tr>
+    <th scope="col"> {{"name" | translate}} <svg (click)="sortData('name')" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
+    </svg></th>
+    <th scope="col">{{"Description" | translate}} <svg (click)="sortData('description')" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
+    </svg></th>
+    <th scope="col">{{"coded" | translate}}<svg (click)="sortData('identifiant')" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
+    </svg></th>
+    <th scope="col">{{'Site' | translate }}</th>
+    <th scope="col">{{'Line' | translate }}</th>
+    <th scope="col">{{'Location' | translate }}</th>
+    <th scope="col">{{"Data" | translate}}</th>
+    <th scope="col">{{"Alert" | translate}}</th>
+    <th scope="col">{{"Connection" | translate}}</th>
+    <th *ngIf="role === true" scope="col">{{"Edit" | translate}}</th>
+    <th *ngIf="role === true" scope="col">{{"Delete" | translate}}</th>
+    <th scope="col">{{"Status" | translate}}</th>
+    <th scope="col">{{"Light lvl" | translate}}</th>
+    <th scope="col"></th>
+    <th scope="col"></th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let device of Devices | searchfilter:SearchText | paginate: { itemsPerPage: 5, currentPage: p }">
+  <tr>
+
+    <td>
+      {{device.name}}
+    </td>
+    <td>
+
+      {{device.description}}
+
+    </td>
+    <td>
+      {{device.identifiant}}
+    </td>
+    <td>
+      {{device.Area.name}}
+    </td>
+    <td>
+      {{device.Ligne.name}}
+    </td>
+    <td>
+      <div class="d-flex align-items-center">
+        <a class="btn btn-sm btn-info text-white ml-1" (click)="Location(device)" ><i class="fa fa-map-marker"></i></a>
+        <div>
+
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="d-flex align-items-center">
+        <a class="btn btn-sm btn-info text-white ml-1" (click)="data(device)" ><i class="fa fa-search"></i></a>
+        <div>
+
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="d-flex align-items-center">
+        <a class="btn btn-sm connection   " [ngClass]="{'btn-danger alerte ': device.alert , 'btn-outline-success good ': !device.alert}" ><i class="fa fa-bell "
+          [ngClass]="{'swinging-bell': device.alert}" style="size:30px;" aria-hidden="true"></i></a>
+      </div>
+    </td>
+    <td>
+      <div class="d-flex align-items-center">
+
+        <a class="btn btn-sm  connection" [ngClass]="{'btn-warning alerte': device.connectivityAlert, 'btn-outline-primary': !device.connectivityAlert}" ><i class="fa fa-bell "
+          [ngClass]="{'swinging-bell': device.connectivityAlert}" style="size:30px" aria-hidden="true"></i></a>
+
+
+      </div>
+    </td>
+    <td *ngIf="role === true">
+      <div class="d-flex align-items-center">
+        <a class="btn btn-sm btn-primary text-white ml-1" (click)="onedit(device)" ><i class="fa fa-edit"></i></a>
+      </div>
+    </td>
+    <td *ngIf="role === true">
+      <div class="d-flex align-items-center">
+        <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteDevice(device._id)"><i class="fa fa-trash"></i></a>
+      </div>
+    </td>
+    <td>
+      <div *ngIf="device.Status === 'activated' ; else elseBlock"><a class="btn btn-sm btn-success text-white ml-1">{{device.Status}}</a></div>
+      <ng-template #elseBlock><a class="btn btn-sm btn-danger text-white ml-1">{{device.Status}}</a></ng-template>
+
+    </td>
+    <td>
+      <progress-bar [progress]="device.luminosite" [color]="'#EBEB00'" >
+      </progress-bar>
+    </td>
+  </tr>
+
+  </tbody>
+</table>
+<pagination-controls (pageChange)="p = $event"  directionLinks="true"
+                     autoHide="true"
+                     responsive="true"
+                     previousLabel="Previous"
+                     nextLabel="Next"
+                     screenReaderPaginationLabel="Pagination"
+                     screenReaderPageLabel="page"
+                     screenReaderCurrentLabel="You're on page"></pagination-controls>
+
+</body>
+<simple-notifications></simple-notifications>
+

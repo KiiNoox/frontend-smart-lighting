@@ -1,0 +1,16 @@
+
+<div class="sidebar-wrapper">
+  <div class="logo">
+        
+     <img src="assets/img/logo.png" style="height: 80px; width: 150px">
+    
+  </div>
+    <ul class="nav" >
+        <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
+            <a [routerLink]="[menuItem.path]">
+                <i class="nc-icon {{menuItem.icon}}" style="height: 50px; width: 50px"></i>
+                <p>{{menuItem.title | translate}}</p>
+            </a>
+        </li>
+    </ul>
+</div>

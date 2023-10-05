@@ -1,0 +1,32 @@
+<div class="modal-header" style="background: #279416">
+  <h6 class="modal-title" style="color:white">Electric Meter Data </h6>
+  <button type="button" class="close" aria-label="Close" (click)="dialog.dismissAll('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="row" *ngIf="x > 0">
+        <div class="data" *ngIf="loading==false">     
+          <p>Last date: {{lastDate}}</p>
+        </div>
+        <div class="data" *ngIf="loading==true">     
+          <mat-spinner mode="indeterminate" color="accent" diameter="50"></mat-spinner>
+        </div>
+ 
+      <rg-gauge-chart
+        [canvasWidth]="canvasWidth"
+        [name]="name2 "
+        [needleValue]="label_ActivePowerTotal"
+        [centralLabel]=" needleValue_PositiveActiveTotal" 
+        [options]="options"
+        [bottomLabel]="bottomLabel">
+      </rg-gauge-chart>
+    </div>
+
+    </div>
+  <div class="row" id="test" style="margin-left:280px" *ngIf="x == 0">
+    <H3>No Device {{x}}</H3>
+  </div>
+  </div>

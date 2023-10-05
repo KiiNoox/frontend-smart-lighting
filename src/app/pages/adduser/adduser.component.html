@@ -1,0 +1,58 @@
+<div class="modal-header">
+  <h6 class="modal-title"> {{"ADD USER" | translate}}</h6>
+  <button type="button" class="close" aria-label="Close" (click)="dialog.dismissAll('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-user">
+      <div class="card-header">
+        <h5 class="card-title">ADD USER</h5>
+      </div>
+      <div class="card-body">
+        <form class="form-grp"   [formGroup]="userForm2" (ngSubmit)="RegisterUser(userForm2.value)">
+          <div>
+            <div>
+              <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" formControlName="username"  placeholder="Username">
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <div class="form-group">
+                <label>User Email</label>
+                <input type="text" class="form-control" formControlName="email" placeholder="Email">
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" formControlName="password" placeholder="Password">
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" formControlName="Confirmpassword" placeholder="Password">
+              </div>
+            </div>
+            <div *ngIf="Error === true" class="alert alert-danger" role="alert" style="width: 280px">  this Email is taken. Try another !</div>
+            <div *ngIf="ErrorPassword === true" class="alert alert-danger" role="alert" style="width: 280px">  These passwords do not match. Try Again.</div>
+          </div>
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <button type="submit" class="btn btn-primary btn-round">Save User</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

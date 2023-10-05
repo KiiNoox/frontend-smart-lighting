@@ -1,0 +1,157 @@
+html,body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+#map-mapglobal {
+  width: 100%;
+  height: 750px;
+  background-color: white;
+}
+.search_StreetLight {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1em 0;
+}
+.testt {
+  width: 300px;
+  height: 50px;
+  padding-left: 6px;
+
+}
+
+
+.apple-popup .mapboxgl-popup-content {
+  background-color: green;
+}
+
+.apple-popup .mapboxgl-popup-tip {
+  border-top-color: green;
+}
+.search_area {
+  background-color:  rgba(255, 255, 255, 0.2);
+  float:right;
+  width: 400px;
+  margin-right: 550px;
+  height: 600px;
+  display: inline;
+
+}
+#search_btn {
+  height: 40px;
+  float: left;
+  width: 5%;
+  background: #2196F3;
+  color: white;
+  border: 1px solid grey;
+  border-left: none; 
+  cursor: pointer;
+  margin-left: 1em;
+}
+
+#search_btn:hover {
+  background: #0b7dda;
+}
+.area {
+  background-color:  rgba(255, 255, 255, 0.2);
+  float:left;width:100px;
+  width: 400px;
+  margin-left: 10px;
+  height: 600px;
+}
+.marker {
+
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+h1 {
+  font-size: 22px;
+  margin: 0;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 20px 2px;
+}
+
+
+/* The page is split between map and sidebar - the sidebar gets 1/3, map
+gets 2/3 of the page. You can adjust this to your personal liking. */
+.sidebarr {
+  position: absolute;
+  width: 33.3333px;
+  height: 100px;
+  top: 0;
+  left: 0;
+}
+
+.heading {
+  background: #8BD2D1;
+
+}
+.quakeInfo {
+  position: absolute;
+  font-family: sans-serif;
+
+  width: 30%;
+  height: 200px;
+  font-size: 14px;
+  color: #222;
+  background-color: #fff;
+  z-index:1;
+
+}
+
+.tabDevice {
+  position:relative;
+  width:100%;
+  background-color: white;
+}
+.searrch {
+  height: 260px;
+  background-color: #279416;
+
+}
+.f
+{
+  width: 100%;
+  background-color: #dee2e6;
+  border: #8BD2D1 ;
+  border-radius: 5px;
+}
+.contentt {
+  display: flex;
+  justify-content: space-between;
+}
+.checkk {
+
+  display: flex;
+  flex-direction: column;
+  width:60%;
+}
+.bSearch{
+  float: left;
+  width: 10%;
+  padding: 2px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; 
+  cursor: pointer;
+}
+.test {
+  cursor: pointer;
+}
+legend {
+  background-color: #279416;
+  color: black;
+}
+.btn-group{
+  margin-top: 2em;
+}
+.btn-group button{
+  margin-right: 1em;
+}

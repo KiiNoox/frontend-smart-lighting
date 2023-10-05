@@ -1,0 +1,39 @@
+<body>
+<form class="form-grp"   [formGroup]="areaForm1" (ngSubmit)="addLigne(areaForm1.value)">
+
+  <div class="modal-header">
+    <h6 class="modal-title">Your Profile </h6>
+    <button type="button" class="close" aria-label="Close" (click)="dialog.dismissAll('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="area" >
+      <div class="login">
+        <p>Username</p>
+        <div class="form-group">
+
+          <p><input type="text" class="form-control" id="name"
+                    formControlName="name" aria-describedby="name" placeholder="Enter name" value="{{username}}"></p>
+        </div>
+        <p>Change Password  </p>
+        <div class="form-group">
+          <p><input type="text" class="form-control" id="description" formControlName="description" placeholder="Change Password"></p>
+        </div>
+        <p>Confirm Password  </p>
+        <div class="form-group">
+          <p><input type="text" class="form-control" id="description" formControlName="description"  placeholder="Change Password"></p>
+        </div>
+        <p>Date of Creation : {{date_creation.slice(0,10)}}</p>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" style="background: #279416">Edit</button>
+        </div>
+      </div>
+
+
+    </div >
+  </div>
+</form>
+</body>
+
+

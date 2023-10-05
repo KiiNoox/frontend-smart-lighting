@@ -1,0 +1,108 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+</head>
+<body>
+
+<div class="tabDevice">
+  <div class="searrch">
+    <fieldset class="f">
+      <legend>{{"Search" | translate}} :</legend>
+      <div class="contentt">
+        <div>
+          <label for="cars">  {{"Search by Site name" | translate}}:</label>
+          <input type="text" placeholder="{{'Search by Site name' | translate}}..." class="form-control" style="width: 300px" (click)="refresh()" [(ngModel)]="SearchText">
+
+        </div>
+        
+      </div>
+      <button type="submit" class="bSearch"(click)="search()"><i class="fa fa-search" ></i> {{"Search" | translate}}</button>
+
+    </fieldset>
+  </div>
+</div>
+<table class="table align-items-center table-flush">
+  <thead class="thead-light">
+  <tr>
+    <th colspan="2"> </th>
+    <th scope="col"> </th>
+    <th scope="col"> </th>
+    <th scope="col"></th>
+    <th scope="col">  </th>
+    <th colspan="3">
+      <div *ngIf="role === true">
+
+          <a class="btn btn-bg btn-success text-white" style="width: 200px" (click)="addArea()"><i class="fa fa-plus"></i> {{"Add site" | translate}}</a>
+      </div>
+        </th>
+
+
+  </tr>
+  <tr>
+    <th scope="col">{{"name" | translate}} <svg (click)="sortData('name')" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
+    </svg></th>
+    <th scope="col">{{"Description" | translate}}</th>
+    <th scope="col">{{'Location' | translate }}</th>
+    <th scope="col">{{"Data" | translate}}</th>
+    <th *ngIf="role === true" scope="col">{{"Edit" | translate}}</th>
+    <th *ngIf="role === true" scope="col">{{"Delete" | translate}}</th>
+    <th>
+    </th>
+
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let Area of cols | searchfilterarea:  SearchText | paginate: { itemsPerPage: 5, currentPage: p }">
+  <tr>
+
+    <td>
+      {{Area.name}}
+    </td>
+    <td>
+                  <span class="badge badge-dot mr-4">
+                    <i >{{Area.description}}</i>
+                  </span>
+    </td>
+    <td>
+      <div class="d-flex align-items-center">
+        <a class="btn btn-sm btn-info text-white ml-1" (click)="Location(Area)" ><i class="fa fa-map-marker"></i></a>
+        <div>
+
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="d-flex align-items-center">
+        <a class="btn btn-sm btn-info text-white ml-1" (click)="data(Area)" ><i class="fa fa-search"></i></a>
+        <div>
+
+        </div>
+      </div>
+    </td>
+    <td *ngIf="role === true">
+      <div class="d-flex align-items-center">
+        <a class="btn btn-sm btn-primary text-white ml-1" (click)="onedit(Area)" ><i class="fa fa-edit"></i></a>
+      </div>
+    </td>
+    <td *ngIf="role === true">
+      <div class="d-flex align-items-center">
+        <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(Area._id)"><i class="fa fa-trash"></i></a>
+      </div>
+    </td>
+     </tr>
+
+  </tbody>
+</table>
+<pagination-controls (pageChange)="p = $event"  directionLinks="true"
+                     autoHide="true"
+                     responsive="true"
+                     previousLabel="Previous"
+                     nextLabel="Next"
+                     screenReaderPaginationLabel="Pagination"
+                     screenReaderPageLabel="page"
+                     screenReaderCurrentLabel="You're on page"></pagination-controls>
+
+
+</body>
+<simple-notifications></simple-notifications>

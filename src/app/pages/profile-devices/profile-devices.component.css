@@ -1,0 +1,176 @@
+.test {
+  transform: scale(1.7);
+  user-select: none;
+  position: relative;
+}
+.tabMotion {
+  width: 100px;
+}
+
+.heure1Reglage {
+  position: absolute;
+  margin-left: 300px;
+  margin-top: -250px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+.heure2Reglage {
+  position: absolute;
+  margin-left: 330px;
+  margin-top: -410px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+.heure3Reglage {
+  position: absolute;
+  margin-left: 430px;
+  margin-top: -500px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+.heure4Reglage {
+  position: absolute;
+  margin-left: 569px;
+  margin-top: -540px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+.heure5Reglage {
+  position: absolute;
+  margin-left: 700px;
+  margin-top: -500px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+.heure6Reglage {
+  position: absolute;
+  margin-left: 805px;
+  margin-top: -410px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+.heure7Reglage {
+  position: absolute;
+  margin-left: 850px;
+  margin-top: -250px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+.SunRiseReglage {
+  position: absolute;
+  margin-left: 850px;
+  margin-top: -270px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+.SunSetReglage {
+  position: absolute;
+  margin-left: 300px;
+  margin-top: -270px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+.buttonReglage {
+  position: absolute;
+  margin-left: 450px;
+  margin-top: -310px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+.buttonReglage2 {
+  position: absolute;
+  margin-left: 450px;
+  margin-top: -390px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 5px;
+}.buttonReglage3 {
+   position: absolute;
+   margin-left: 520px;
+   margin-top: -430px;
+   transform: translate(-50%, -50%);
+   -ms-transform: translate(-50%, -50%);
+   border-radius: 5px;
+ }.buttonReglage4 {
+     position: absolute;
+     margin-left: 610px;
+     margin-top: -430px;
+     transform: translate(-50%, -50%);
+     -ms-transform: translate(-50%, -50%);
+     border-radius: 5px;
+  }.buttonReglage5 {
+        position: absolute;
+        margin-left: 690px;
+        margin-top: -400px;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        border-radius: 5px;
+   }
+  .buttonReglage6 {
+    position: absolute;
+    margin-left: 720px;
+    margin-top: -310px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    border-radius: 5px;
+    }
+.custom-class  {
+  max-width: 200%;
+}
+.Profiles{
+  position:relative;
+  width: 260px;
+  background-color: white;
+  float:left;
+  overflow-y: scroll; /* Show vertical scrollbar */
+  height: 700px;
+  z-index: 100;
+
+}
+.imghorloge {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 300px;
+  margin-top: 180px;
+}
+.reglage {
+  margin-left:27%;
+  width: 90%;
+}
+.inputs {
+  display: flex;
+  justify-content: space-between;}
+.colorr {
+  margin-right: 100px;
+  margin-left: 100px;
+}
+.Motion {
+  margin-right: 1500px;
+
+}
+.modal-header {
+  background-color: #279416;
+  display: flex;
+  justify-content: space-between;
+}
+.save {
+  margin-left: 800px;
+  margin-top: -20px;
+}
+.profile_name {
+  text-align: center;
+  width: 50%;
+  margin: 0 6em;
+  color:#fff
+  
+}

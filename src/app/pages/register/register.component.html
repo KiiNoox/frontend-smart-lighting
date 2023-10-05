@@ -1,0 +1,42 @@
+<form class="form-grp"   [formGroup]="userForm1" (ngSubmit)="addCompany(userForm1.value)">
+
+  <div class="form-group">
+    <label >Username</label>
+    <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username"
+           formControlName="username"
+    >
+  </div>
+
+
+  <div class="form-group">
+    <label >Email address</label>
+    <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" placeholder="Enter email">
+  </div>
+
+  <div class="form-group">
+    <label >Password</label>
+    <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+  </div>
+
+  <div class="form-group">
+
+
+      <label for="pet-select">Choose a role:</label>
+
+      <select name="role" id="pet-select" formControlName="role">
+        <option value="">--Please choose an Role--</option>
+        <option value="Admin">Admin</option>
+        <option value="Super Admin">Super Admin</option>
+      </select>
+
+
+
+  </div>
+
+
+  <div class="text-center">
+    <button type="submit" class="btn btn-primary mt-4" >Create account</button>
+    <!-- notifier declare -->
+
+  </div>
+</form>
